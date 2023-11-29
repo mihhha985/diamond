@@ -1,0 +1,42 @@
+.modal-content{
+  min-width: 340px;
+  position: relative;
+  border-radius: 20px;
+  padding: 25px;
+  background: rgba(255,255,255, 0.1);
+  border: 1px solid rgba(255,255,255, 0.2);;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+
+  input, textarea{
+    @apply w-full sm:w-4/5 bg-primary p-2 rounded-md text-base border-0 font-link text-secondary-300;
+  }
+
+  button{
+    @apply bg-secondary-200 text-primary text-lg font-semibold p-2 rounded-md w-full sm:w-4/5 opacity-90 hover:opacity-100;
+  }
+}
+
+.frameBox{
+  width: 320px;
+  height: 90px;
+  margin-top: auto;
+}
+
+@media screen and (max-width: 480px) {
+  .modal-content{
+    position: relative;
+    border-radius: 15px;
+    padding: 20px;
+  }
+
+  .frameBox{
+  position: relative;
+  right: 10px;  
+  width: 320px;
+  height: 90px;
+  margin-top: auto;
+  }
+}

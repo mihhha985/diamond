@@ -1,0 +1,129 @@
+"use client";
+import { FaRegHeart } from "react-icons/fa6";
+import { BiMessageRounded } from "react-icons/bi";
+import { Contact } from "@/types/contactType";
+import {TypeHair, TypeFigures } from "@/config/params";
+import {  useAppDispatch } from "@/store/hooks";
+import {show} from "@/store/features/alertsSlice";
+import { showPayment } from "@/store/features/paymentSlice";
+import AlertModal from "../Modal/AlertModal";
+import PaymentModal from "../Modal/PaymentModal";
+import translate from "@/config/translate-view";
+import styles from './viewDescript.module.css';
+
+function ViewDescript({user}: {user: Contact}) {
+  const dispatch = useAppDispatch();
+
+  const showHint = (e:React.MouseEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    const hint = el.querySelector('p') as HTMLParagraphElement;
+    hint.style.display = 'block';
+  }
+
+  const hideHint = (e:React.MouseEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    const hint = el.querySelector('p') as HTMLParagraphElement;
+    hint.style.display = 'none';
+  }
+
+  const getHairColor = (id: number):string => {
+    let item = TypeHair.find((item) => item.id === id) as {id: number, value: string} | undefined;
+    if (item === undefined) {
+      return 'Не указано';
+    }else{
+      return item.value;
+    }
+  }
+
+  const getTypeFigure = (id: number):string => {
+    let item = TypeFigures.find((item) => item.id === id) as {id: number, value: string} | undefined;
+    if (item === undefined) {
+      return 'Не указано';
+    }else{
+      return item.value;
+    }
+  }
+
+  return ( 
+    <>
+    <div className={styles.viewContainer}>
+        <div className="text-primary border-b border-primary pb-2 relative">
+          <div className="text-2xl sm:text-4xl">{user.firstName}</div>
+          <div className="text-xl sm:text-2xl">Возраст: {user.description.age} лет</div>
+          <div className="absolute top-5 right-4 cursor-pointer flex gap-5">
+            <div 
+              onMouseMove={(e) => {showHint(e)}}
+              onMouseOut={(e) => {hideHint(e)}}
+              onClick={() => {dispatch(show({
+                text: translate.message.ru, 
+                language: 'ru'
+              }))}}
+              className="relative">
+              <BiMessageRounded size={32} className="opacity-75 hover:opacity-100 transition-opacity"/>
+              <p style={{whiteSpace: 'nowrap', top: "-40px"}}
+              className="hidden absolute right-0 p-2 rounded bg-primary text-secondary-300 text-sm">
+              Написать сообщение</p>
+            </div>
+            <div 
+              onMouseMove={(e) => {showHint(e)}}
+              onMouseOut={(e) => {hideHint(e)}}
+              onClick={() => {dispatch(show({
+                text: 'Пользователь добавлен в понравившиеся!', 
+                language: 'ru'
+              }))}}
+              className="relative">
+              <FaRegHeart size={32} className="opacity-75 hover:opacity-100 transition-opacity"/>
+              <p style={{whiteSpace: 'nowrap', top: "-40px"}}
+              className="hidden absolute right-0 p-2 rounded bg-primary text-secondary-300 text-sm">
+              Добавить в понравившиеся</p>
+            </div>
+          </div>
+        </div>
+        <div className="border-b border-primary pb-2">
+          <h4 className={styles.headline}>Параметры:</h4>
+          <div className="grid grid-cols-2 gap-2">
+            <div className={styles.text}>Рост: {user.description.height} см</div>
+            <div className={styles.text}>Вес: {user.description.age} кг</div>
+            <div className={styles.text}>Грудь: {user.description.cupSize} размер</div>
+            <div className={styles.text}>Цвет волос: {getHairColor(user.description.hairColor)}</div>
+            <div className={styles.text}>Тип фигуры: {getTypeFigure(user.description.typeFigure)}</div>
+            <div className={styles.text}>
+              <span>Размеры: </span>    
+              <span>---</span>  
+            </div>
+          </div>
+        </div>
+        <div className="mt-2 sm:mt-5">
+          <h4 className={styles.headline}>О себе:</h4>
+          <div className="text-lg sm:text-xl bg-primary rounded-md p-2 w-full xl:w-3/4 mb-5">
+            <p className="text-secondary-200">{user.about}</p>
+          </div>
+        </div>
+        <div className="flex flex-col xl:flex-row gap-2 w-full mt-auto whitespace-nowrap">
+          <button
+            onClick={() => {dispatch(showPayment())}} 
+            className={styles.btn}>
+            Получить контакты</button>
+          <button
+            onClick={() => {dispatch(show({
+              text: translate.transfer.ru,
+              language: 'ru'
+            }))}} 
+            className={styles.btn}>Оплатить трансфер
+            </button>
+          <button
+            onClick={() => {dispatch(show({
+              text: translate.order.ru,
+              language: 'ru'
+            }))}}
+            className={styles.btn}>Заказать цветы
+            </button>
+        </div>
+      </div>
+      <AlertModal />
+      <PaymentModal name={user.firstName} age={user.description.age}/>
+    </> 
+  );
+}
+
+export default ViewDescript;
