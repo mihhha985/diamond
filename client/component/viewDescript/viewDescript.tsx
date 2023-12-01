@@ -1,5 +1,6 @@
 "use client";
-import { FaRegHeart } from "react-icons/fa6";
+import { useEffect, useState } from "react";
+import { FaRegHeart, FaHeart } from "react-icons/fa6";
 import { BiMessageRounded } from "react-icons/bi";
 import { Contact } from "@/types/contactType";
 import {TypeHair, TypeFigures } from "@/config/params";
@@ -13,6 +14,21 @@ import styles from './viewDescript.module.css';
 
 function ViewDescript({user}: {user: Contact}) {
   const dispatch = useAppDispatch();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const favorites = localStorage.getItem('favorites');
+    console.log(favorites);
+    const ids = favorites ? favorites.split(',') : [];
+    const index = ids.indexOf(user.id.toString());
+    console.log('индекс: ' + index);
+    console.log('ids: ' + ids);
+    if(index === -1){
+      setIsFavorite(false);
+    }else{
+      setIsFavorite(true);
+    }
+  }, [user.id]);
 
   const showHint = (e:React.MouseEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
@@ -44,6 +60,30 @@ function ViewDescript({user}: {user: Contact}) {
     }
   }
 
+  const toggleFavorites = (id:number) => {
+    const favorites = localStorage.getItem('favorites');
+    const ids = favorites ? favorites.split(',') : [];
+    const index = ids.indexOf(user.id.toString());
+
+    if(!isFavorite){
+      ids.push(id.toString());
+      setIsFavorite(true);
+      dispatch(show({
+        text: 'Пользователь добавлен в понравившиеся!', 
+        language: 'ru'
+      }))
+    }else{
+      ids.splice(index, 1);
+      setIsFavorite(false);
+      dispatch(show({
+        text: 'Пользователь удалён из понравившихся!', 
+        language: 'ru'
+      }))
+    }
+
+    localStorage.setItem('favorites', ids.join(','));
+  }
+
   return ( 
     <>
     <div className={styles.viewContainer}>
@@ -67,15 +107,20 @@ function ViewDescript({user}: {user: Contact}) {
             <div 
               onMouseMove={(e) => {showHint(e)}}
               onMouseOut={(e) => {hideHint(e)}}
-              onClick={() => {dispatch(show({
-                text: 'Пользователь добавлен в понравившиеся!', 
-                language: 'ru'
-              }))}}
+              onClick={() => {toggleFavorites(user.id)}}
               className="relative">
-              <FaRegHeart size={32} className="opacity-75 hover:opacity-100 transition-opacity"/>
+              {
+                !isFavorite
+                ? <FaRegHeart size={32} className="opacity-75 hover:opacity-100 transition-opacity"/>
+                : <FaHeart size={32} className="opacity-75 hover:opacity-100 transition-opacity"/>
+              }
               <p style={{whiteSpace: 'nowrap', top: "-40px"}}
               className="hidden absolute right-0 p-2 rounded bg-primary text-secondary-300 text-sm">
-              Добавить в понравившиеся</p>
+              {!isFavorite
+                ? 'Добавить в понравившиеся'
+                : 'Удалить из понравившихся'
+              } 
+              </p>
             </div>
           </div>
         </div>

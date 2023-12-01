@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/scss/image-gallery.scss";
 
@@ -16,7 +16,6 @@ function ViewGallery({id}: {id:number}) {
       fetch(`http://localhost:8000/models/gallery/${id}`)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         const img: ImageGalleryType[] = [];
         for (let i = 0; i < data.foto.length; i++) {
           const el = {

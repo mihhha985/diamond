@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Query, ParseUUIDPipe, ParseIntPipe } from '@nestjs/common';
+import { Controller, 
+  Get, 
+  Post,
+  Body, 
+  Param, 
+  Query, 
+  ParseUUIDPipe, 
+  ParseIntPipe 
+} from '@nestjs/common';
 import { ModelsService } from './models.service';
 import { Contact } from './entity/contact.entity';
 
@@ -25,6 +33,13 @@ export class ModelsController {
   @Get('count')
   count():Promise<number> {
     return this.modelsService.totalCount();
+  }
+
+  @Post('favorites')
+  findFavorites(@Body()dto:string) {
+    //const ids = dto.ids.split(',').map(item => parseInt(item));
+    console.log(dto);
+    //return this.modelsService.findFavorites(ids);
   }
 
   @Get(':uuid')

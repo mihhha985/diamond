@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { MdEmail } from "react-icons/md";
 import { RiStarSmileFill, RiShoppingCart2Fill } from "react-icons/ri";
 import {FaComments, FaUserLarge, FaHeart} from "react-icons/fa6";
@@ -11,6 +12,7 @@ import "@/styles/Sidebar.scss";
 
 function Sidebar() {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const showHint = (e:React.MouseEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
     const hint = el.querySelector('p') as HTMLParagraphElement;
@@ -21,6 +23,18 @@ function Sidebar() {
     const el = e.currentTarget;
     const hint = el.querySelector('p') as HTMLParagraphElement;
     hint.style.display = 'none';
+  }
+
+  const getFavorites = () => {
+    const favorites = localStorage.getItem('favorites');
+    if(favorites){
+      router.push('/favorites');
+    }else{
+      dispatch(show({
+        text:SideBarText.likes.ru,
+        language:'ru'
+      }));
+    }
   }
 
   return ( 
@@ -39,10 +53,7 @@ function Sidebar() {
       <div
         onMouseMove={(e) => {showHint(e)}}
         onMouseOut={(e) => {hideHint(e)}} 
-        onClick={() => dispatch(show({
-          text:SideBarText.likes.ru,
-          language:'ru'
-        }))}
+        onClick={getFavorites}
         className="item">
         <FaHeart />
         <p>Понравившиеся</p>

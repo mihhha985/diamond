@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Contact } from './entity/contact.entity';
+import { In } from "typeorm";
+import dataSource from 'db/orm.config';
 import { resolve } from 'path';
 import { existsSync, readdirSync } from 'fs';
 
@@ -19,6 +21,16 @@ export class ModelsService {
       skip: offset,
       relations: ['description'],
     });
+  }
+
+  async findFavorites(ids:number[]): Promise<Contact[] | void> {
+    try{
+      return await this.contactRepository.findBy({
+        id: In(ids),
+      })
+    }catch(err) {
+      console.log(err);
+    }
   }
 
   async totalCount(): Promise<number> {
