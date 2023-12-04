@@ -4,7 +4,7 @@ import {Contact} from "@/types/contactType";
 
 const GetModelByUuid = async (uuid: string):Promise<Contact|null> => {
 	try{
-		const res = await fetch(`http://localhost:8000/models/${uuid}`,  { cache: 'no-store' });
+		const res = await fetch(`${process.env.serverUrl}/models/${uuid}`,  { cache: 'no-store' });
 		if(res.status === 200){
 			const data = await res.json();
 			return data;

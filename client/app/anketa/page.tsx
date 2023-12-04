@@ -25,7 +25,7 @@ function Anketa() {
 			'age': age,
 		}
 
-		fetch("http://localhost:8000/send/anketa", {
+		fetch(`${process.env.serverUrl}/send/anketa`, {
 			method: "POST",
 			body: JSON.stringify(data),
 			headers: {
@@ -41,6 +41,10 @@ function Anketa() {
 		})
 		.catch(err => {
 			console.log(err);
+		}).finally(() => {
+			setName('');
+			setAge('');
+			setTell('');
 		})
 	}
 

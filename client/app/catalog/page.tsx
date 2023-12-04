@@ -14,7 +14,7 @@ const getModels = async (limit:string | undefined, offset:string | undefined) =>
   if (offset !== undefined) {
     currentOffset = parseInt(offset);
   }
-  const res = await fetch(`http://localhost:8000/models?limit=${currentLimit}&offset=${currentOffset}`,  { 
+  const res = await fetch(`${process.env.serverUrl}/models?limit=${currentLimit}&offset=${currentOffset}`,  { 
     cache: 'no-cache',
   });
   const data = await res.json();

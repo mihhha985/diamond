@@ -1,3 +1,5 @@
+"use client"
+import {useEffect, useRef, RefObject} from "react";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { hidePayment } from "@/store/features/paymentSlice";
 import { IoCloseCircleOutline } from "react-icons/io5";
@@ -5,7 +7,20 @@ import "./Modal.scss";
 
 function PaymentModal({name, age}: {name: string, age: number}) {
   const dispatch = useAppDispatch();
-  const {visible}= useAppSelector(state => state.payment);
+  const {visible} = useAppSelector(state => state.payment);
+	const boxRef = useRef() as RefObject<HTMLDivElement>;
+
+	useEffect(() => {
+		let frame = document.createElement('iframe');
+		frame.setAttribute('src', 'https://yoomoney.ru/quickpay/fundraise/button?billNumber=y8hiXQOrQts.230506&');
+		frame.style.width = '100%';
+		frame.style.height = '100%';
+		if(boxRef.current) boxRef.current.appendChild(frame);
+
+		return () => {
+			if(boxRef.current) boxRef.current.innerHTML = '';
+		}
+	}, [visible]);
 
   if (visible) {
     return ( 
@@ -26,16 +41,7 @@ function PaymentModal({name, age}: {name: string, age: number}) {
           <h4 className="text-xl">Получить контакты 
             <span className="font-semibold ml-2">{name} - {age} года</span>
           </h4>
-          <div className="frameBox">
-           <iframe 
-            src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=y8hiXQOrQts.230506&" 
-            width="100%" 
-            height="100%" 
-            frameBorder="0"
-            allowTransparency={true} 
-            scrolling="no">
-           </iframe>
-          </div>
+          <div className="frameBox" ref={boxRef}></div>
         </div>
       </div>
     );

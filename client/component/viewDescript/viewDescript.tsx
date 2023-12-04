@@ -128,7 +128,7 @@ function ViewDescript({user}: {user: Contact}) {
           <h4 className={styles.headline}>Параметры:</h4>
           <div className="grid grid-cols-2 gap-2">
             <div className={styles.text}>Рост: {user.description.height} см</div>
-            <div className={styles.text}>Вес: {user.description.age} кг</div>
+            <div className={styles.text}>Вес: {user.description.weight} кг</div>
             <div className={styles.text}>Грудь: {user.description.cupSize} размер</div>
             <div className={styles.text}>Цвет волос: {getHairColor(user.description.hairColor)}</div>
             <div className={styles.text}>Тип фигуры: {getTypeFigure(user.description.typeFigure)}</div>

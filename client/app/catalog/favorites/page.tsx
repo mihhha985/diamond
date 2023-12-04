@@ -14,7 +14,7 @@ function Favorites() {
   useEffect(() => {
     const ids = localStorage.getItem('favorites');
     console.log(ids);
-    fetch(`http://localhost:8000/models/favorites?ids=${ids}`,  {
+    fetch(`${process.env.serverUrl}/models/favorites?ids=${ids}`,  {
       cache: 'no-cache',
     })
     .then(result => result.json())

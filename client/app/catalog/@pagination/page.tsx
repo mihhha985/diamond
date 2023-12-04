@@ -11,7 +11,7 @@ function Pagination() {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    fetch('http://localhost:8000/models/count')
+    fetch(`${process.env.serverUrl}/models/count`)
     .then(res => res.text())
     .then(res => setTotal(parseInt(res)));
   }, []);
