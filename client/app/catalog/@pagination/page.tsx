@@ -1,10 +1,12 @@
 "use client";
 import {useState, useEffect} from 'react';
+import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import ReactPaginate from 'react-paginate';
 import '@/styles/Pagination.css';
 
 function Pagination() {
+	const path = usePathname();
   const router = useRouter();
   const [total, setTotal] = useState(0);
 
@@ -19,7 +21,7 @@ function Pagination() {
     router.push(`/catalog?limit=9&offset=${selectedPage}`);
   }
 
-  if (total > 9) {
+  if (total > 9 && path === '/catalog') {
     return ( 
       <div className="pagination">
         <ReactPaginate

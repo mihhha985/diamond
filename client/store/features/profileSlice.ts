@@ -20,14 +20,14 @@ export const profileSlice = createSlice({
     hideProfile: (state) => {
       state.visible = false;
     },
-    login: (state) => {
+    setLogin: (state) => {
       state.isLogin = true;
     },
-    register: (state) => {
+    setRegister: (state) => {
       state.isLogin = false;
     }
   }
 });
 
-export const { showProfile, hideProfile, login, register } = profileSlice.actions;
+export const { showProfile, hideProfile, setLogin, setRegister } = profileSlice.actions;
 export default profileSlice.reducer;

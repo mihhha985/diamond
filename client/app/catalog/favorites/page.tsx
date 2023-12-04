@@ -1,5 +1,6 @@
 "use client"
 import {useEffect, useState} from "react";
+import { useRouter } from "next/navigation";
 import CatalogItem from "@/component/catalogItem/CatalogItem";
 import AlertModal from "@/component/Modal/AlertModal";
 import ProfileModal from "@/component/Modal/ProfileModale";
@@ -7,22 +8,24 @@ import MailerModal from "@/component/Modal/MailerModal";
 import {Contact} from "@/types/contactType";
 
 function Favorites() {
+	const router = useRouter();
   const [user, setUser] = useState<Contact[] | []>([]);
+
   useEffect(() => {
     const ids = localStorage.getItem('favorites');
     console.log(ids);
-    fetch(`http://localhost:8000/models/favorites`,  {
-      method: 'POST', 
+    fetch(`http://localhost:8000/models/favorites?ids=${ids}`,  {
       cache: 'no-cache',
-      body:ids
     })
-    /*
     .then(result => result.json())
     .then(result => {
       console.log(result);
       setUser(result);
-    });
-    */
+    })
+		.catch(error => {
+			console.log('error', error);
+			router.push('/catalog');
+		});
   }, []);
   
   if(user.length > 0){
@@ -37,7 +40,7 @@ function Favorites() {
                 id={item.description.id}
                 name={item.firstName}
                 uuid={item.uuid}
-                age={item.description.age} 
+                age={24} 
                 rating={item.rating}
               />
             ))}

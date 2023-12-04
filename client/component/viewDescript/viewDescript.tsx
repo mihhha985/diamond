@@ -18,11 +18,8 @@ function ViewDescript({user}: {user: Contact}) {
 
   useEffect(() => {
     const favorites = localStorage.getItem('favorites');
-    console.log(favorites);
     const ids = favorites ? favorites.split(',') : [];
     const index = ids.indexOf(user.id.toString());
-    console.log('индекс: ' + index);
-    console.log('ids: ' + ids);
     if(index === -1){
       setIsFavorite(false);
     }else{
@@ -60,7 +57,7 @@ function ViewDescript({user}: {user: Contact}) {
     }
   }
 
-  const toggleFavorites = (id:number) => {
+  const toggleFavorites = (e:React.MouseEvent<HTMLDivElement>, id:number) => {
     const favorites = localStorage.getItem('favorites');
     const ids = favorites ? favorites.split(',') : [];
     const index = ids.indexOf(user.id.toString());
@@ -78,10 +75,13 @@ function ViewDescript({user}: {user: Contact}) {
       dispatch(show({
         text: 'Пользователь удалён из понравившихся!', 
         language: 'ru'
-      }))
+      }));
     }
 
     localStorage.setItem('favorites', ids.join(','));
+		const el = e.currentTarget;
+    const hint = el.querySelector('p') as HTMLParagraphElement;
+    hint.style.display = 'none';
   }
 
   return ( 
@@ -107,7 +107,7 @@ function ViewDescript({user}: {user: Contact}) {
             <div 
               onMouseMove={(e) => {showHint(e)}}
               onMouseOut={(e) => {hideHint(e)}}
-              onClick={() => {toggleFavorites(user.id)}}
+              onClick={e => {toggleFavorites(e, user.id)}}
               className="relative">
               {
                 !isFavorite

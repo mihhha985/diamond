@@ -9,6 +9,7 @@ body {
   color: #fff;
   font-family: var(--font-inter);
   min-width: 360px;
+	background-image: linear-gradient(to bottom, #465163 5%, #fce6fa 95%)
 }
 
 a{
@@ -21,6 +22,11 @@ a{
   position: relative;
   padding-top:120px;
   background-image: linear-gradient(to bottom, #465163 5%, #fce6fa 95%)
+}
+
+.wrapper{
+	width: 1280px;
+	margin: 0 auto;
 }
 
 .diamond-shadow{
@@ -43,6 +49,7 @@ a{
 .catalog{
   position: relative;
   width: 100%;
+	min-height: calc(100vh - 120px);
   display: grid;
   grid-template-columns: 80px 1fr;
   grid-template-rows: auto auto;
@@ -160,6 +167,12 @@ a{
 
 .headline{
   @apply font-header text-center font-bold text-2xl sm:text-4xl lg:text-5xl text-secondary-200 mb-2 sm:mb-5;
+}
+
+@media screen and (max-width:1920px) {
+	.wrapper{
+		width: auto;
+	}
 }
 
 @media screen and (max-width: 998px) {

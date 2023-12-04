@@ -28,7 +28,7 @@ function Sidebar() {
   const getFavorites = () => {
     const favorites = localStorage.getItem('favorites');
     if(favorites){
-      router.push('/favorites');
+      router.push('/catalog/favorites');
     }else{
       dispatch(show({
         text:SideBarText.likes.ru,

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { Cormorant_SC } from 'next/font/google';
 import Providers from '@/component/Provider';
-import './globals.css'
+import '@/styles/globals.css';
 
 const inter = Cormorant_SC({ 
   subsets: ['latin', 'cyrillic'], 
