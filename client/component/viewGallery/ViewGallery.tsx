@@ -13,14 +13,14 @@ function ViewGallery({id}: {id:number}) {
   const [images, setImages] = useState<ImageGalleryType[]>([]);
 
   useEffect(() => {
-      fetch(`http://localhost:8000/models/gallery/${id}`)
+      fetch(`${process.env.serverUrl}/models/gallery/${id}`)
       .then(res => res.json())
       .then(data => {
         const img: ImageGalleryType[] = [];
         for (let i = 0; i < data.foto.length; i++) {
           const el = {
-            original: `http://localhost:8000/${id}/foto/${data.foto[i]}`,
-            thumbnail: `http://localhost:8000/${id}/foto/th/${data.th[i]}`
+            original: `${process.env.serverUrl}/${id}/foto/${data.foto[i]}`,
+            thumbnail: `${process.env.serverUrl}/${id}/foto/th/${data.th[i]}`
           }
 
           img.push(el);
