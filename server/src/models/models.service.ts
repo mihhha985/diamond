@@ -12,11 +12,14 @@ export class ModelsService {
     private contactRepository: Repository<Contact>,
   ) {}
 
-  async findAll(limit:number, offset:number): Promise<Contact[]> {
+  async findAll(offset:number): Promise<Contact[]> {
 		try{
 			return await this.contactRepository.find({
 				where: { isActive: 1 },
-				take: limit,
+				order: {
+					rating:"DESC"
+				},
+				take: 9,
 				skip: offset,
 				relations: ['description'],
 			});

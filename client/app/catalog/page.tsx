@@ -3,18 +3,12 @@ import AlertModal from "@/component/Modal/AlertModal";
 import ProfileModal from "@/component/Modal/ProfileModale";
 import MailerModal from "@/component/Modal/MailerModal";
 
-const getModels = async (limit:string | undefined, offset:string | undefined) => {
-  //console.log(limit, offset);
-  let currentLimit = 9;
+const getModels = async (offset:string | undefined) => {
   let currentOffset = 0;
-  if (limit !== undefined) {
-    currentLimit = parseInt(limit);
-  }
-
   if (offset !== undefined) {
     currentOffset = parseInt(offset);
   }
-  const res = await fetch(`${process.env.serverUrl}/models?limit=${currentLimit}&offset=${currentOffset}`,  { 
+  const res = await fetch(`${process.env.serverUrl}/models?offset=${currentOffset}`,  { 
     cache: 'no-cache',
   });
   const data = await res.json();
@@ -22,15 +16,8 @@ const getModels = async (limit:string | undefined, offset:string | undefined) =>
 }
 
 async function Catalog({searchParams}:{searchParams: { [key: string]: string | string[] | undefined }}) {
-  let limit = undefined;
-  let offset = undefined;
-  if (searchParams.limit !== undefined) {
-    limit = searchParams.limit as string;
-  }
-  if (searchParams.offset !== undefined) {
-    offset = searchParams.offset as string;
-  }
-  const user = await getModels(limit, offset);
+  const offset = searchParams.offset as string;
+  const user = await getModels(offset);
   return ( 
     <div className="relative">
       <div className="catalog-container">
@@ -44,6 +31,7 @@ async function Catalog({searchParams}:{searchParams: { [key: string]: string | s
               uuid={item.uuid}
               age={item.description.age} 
               rating={item.rating}
+							offset={offset}
             />
           ))}
         </div>

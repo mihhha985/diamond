@@ -1,6 +1,7 @@
 import ViewGallery from "@/component/viewGallery/ViewGallery";
 import ViewDescript from "@/component/viewDescript/viewDescript";
 import {Contact} from "@/types/contactType";
+import Breadcrumbs from "@/component/breadcrumbs/Breadcrumbs";
 
 const GetModelByUuid = async (uuid: string):Promise<Contact|null> => {
 	try{
@@ -16,9 +17,10 @@ const GetModelByUuid = async (uuid: string):Promise<Contact|null> => {
 	}	
 }
 
-async function View({ params }: { params: { uuid: string } }) {
-  const user = await GetModelByUuid(params.uuid);
-	
+async function View({ params }: { params: { uuid: string[] } }) {
+  const user = await GetModelByUuid(params.uuid[0]);
+	const offset = params.uuid[1];
+
   if(user){
 		return ( 
 			<div>   
@@ -27,6 +29,7 @@ async function View({ params }: { params: { uuid: string } }) {
 					<h3 className="text-primary text-3xl lg:text-4xl" style={{whiteSpace: 'nowrap'}}>Эскорт Модель</h3>
 					<div className="bg-primary w-full h-1 rounded-3xl"></div>
 				</div>
+				<Breadcrumbs offset={offset} name={user.firstName}/>
 				<div className="block lg:grid lg:grid-cols-2 gap-5 h-full w-full p-5 min-h-screen">
 					<ViewGallery id={user.description.id} />
 					<ViewDescript user={user}/>

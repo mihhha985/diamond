@@ -14,19 +14,14 @@ export class ModelsController {
   constructor(private readonly modelsService: ModelsService) {}
 
   @Get()
-  findAll(@Query('limit') limit:string, @Query('offset') offset:string):Promise<Contact[]> {
-    let limitNumber:number = 9;
+  findAll(@Query('offset') offset:string):Promise<Contact[]> {
     let offsetNumber:number = 0;
-    
-    if(limit !== undefined ) {
-      limitNumber = parseInt(limit);
-    }
 
     if(offset !== undefined) {
       offsetNumber = parseInt(offset);
     }
 
-    return this.modelsService.findAll(limitNumber, offsetNumber);
+    return this.modelsService.findAll(offsetNumber);
   }
 
   @Get('count')

@@ -42,6 +42,7 @@ function Favorites() {
                 uuid={item.uuid}
                 age={24} 
                 rating={item.rating}
+								offset='0'
               />
             ))}
           </div>

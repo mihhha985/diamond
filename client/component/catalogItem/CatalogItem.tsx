@@ -2,11 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaStarHalfStroke, FaStar  } from "react-icons/fa6";
 
-function CatalogItem({id, name, age, uuid, rating}: {id: number, name: string, age: number, uuid: string, rating: number}) {
+function CatalogItem({id, name, age, uuid, rating, offset}: {id: number, name: string, age: number, uuid: string, rating: number, offset:string}) {
   return ( 
     <div className="bg-primary rounded-2xl overflow-hidden transition-shadow duration-500 
       border border-secondary-200 shadow-2xl shadow-secondary-200 hover:shadow-none relative mb-10 md:mb-0">
-      <Link href={'/view/' + uuid} className="cursor-pointer relative block w-full h-96">
+      <Link href={'/view/' + uuid + '/' + offset} className="cursor-pointer relative block w-full h-96">
         <Image 
           src={`http://localhost:8000/${id}/ava.jpg`}
           alt={name}

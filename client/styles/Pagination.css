@@ -1,7 +1,7 @@
 .pagination{
   grid-area: pagination;
   display: inline-flex;
-  margin: 0 auto;
+  width: fit-content;
   background: transparent;
   border: 1px solid rgba(0,0,0, 0.4);
   padding: 10px 20px;
