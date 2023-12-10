@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { Cormorant_SC } from 'next/font/google';
 import Providers from '@/component/Provider';
+import { Suspense } from "react";
+import { Metrika } from "@/component/metrica/Metrica";
 import '@/styles/globals.css';
 
 const inter = Cormorant_SC({ 
@@ -26,6 +28,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.png"  type="image/png"/>
       </head>
       <body className={inter.className}>
+				<Suspense>
+					<Metrika />
+				</Suspense>
         <Providers>
           {children}
         </Providers>
