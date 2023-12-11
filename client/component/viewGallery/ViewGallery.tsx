@@ -31,7 +31,7 @@ function ViewGallery({id}: {id:number}) {
   }, []);
 
   return (
-    <div id="image-container" className="w-full h-screen lg:h-full mb-10 lg:mg-0 relative">
+    <div id="image-container" className="w-full lg:h-full mb-10 lg:mg-0 relative">
       {images.length > 0 && <ImageGallery items={images} />}
     </div>
   );

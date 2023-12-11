@@ -34,3 +34,27 @@
 .pagination > ul > li.selected > a{
   opacity: 1;
 }
+
+
+@media screen and (max-width: 620px) {
+	.pagination{
+		padding: 5px 10px;
+		border-radius: 6px;
+	}
+
+	.pagination > ul{
+		column-gap: 3px;
+		font-size: 14px;
+	}
+	
+	.pagination > ul > li > a{
+		background: #655166;
+		border-radius: 50%;
+		display: inline-flex;
+		width: 25px;
+		height: 25px;
+		align-items: center;
+		justify-content: center;
+		opacity: .6;
+	}
+}

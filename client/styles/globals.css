@@ -8,8 +8,8 @@ body {
   padding: 0;
   color: #fff;
   font-family: var(--font-inter);
-  min-width: 360px;
-	background-image: linear-gradient(to bottom, #465163 5%, #fce6fa 95%)
+	min-width: 360px;
+	background-image: linear-gradient(to bottom, #465163 5%, #fce6fa 95%);
 }
 
 a{
@@ -48,7 +48,7 @@ a{
 
 .catalog{
   position: relative;
-  width: 100%;
+  max-width: 100%;
 	min-height: calc(100vh - 120px);
   display: grid;
   grid-template-columns: 80px 1fr;
@@ -61,7 +61,8 @@ a{
 
 .catalog-container{
   grid-area: catalog;
-  height: 80vh;
+	width: 100%;
+  height:80vh;
   border-radius: 20px 10px 10px 20px;
   padding: 45px;
   background: rgba(255,255,255, 0.2);

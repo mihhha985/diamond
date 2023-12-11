@@ -30,7 +30,7 @@ async function View({ params }: { params: { uuid: string[] } }) {
 					<div className="bg-primary w-full h-1 rounded-3xl"></div>
 				</div>
 				<Breadcrumbs offset={offset} name={user.firstName}/>
-				<div className="block lg:grid lg:grid-cols-2 gap-5 h-full w-full p-5 min-h-screen">
+				<div className="block lg:grid lg:grid-cols-2 gap-5 h-full w-full p-5">
 					<ViewGallery id={user.description.id} />
 					<ViewDescript user={user}/>
 				</div>

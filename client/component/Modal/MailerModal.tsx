@@ -30,7 +30,7 @@ function MailerModal() {
 			sendButtonRef.current.style.cursor = 'not-allowed';
 		}
 
-		fetch("http://localhost:8000/mailer", {
+		fetch(`${process.env.serverUrl}/mailer`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"

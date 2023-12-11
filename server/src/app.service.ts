@@ -13,10 +13,10 @@ export class AppService {
 	async sendMail(dto:SendMailDto) {
 		try{
 			return await this.mailerService.sendMail({
-        to: dto.email,
+        to: "diamond-dating@yandex.ru",
 				from: 'mihhha985@yandex.ru', 
-        subject: dto.name,
-        text: dto.text, 
+        subject: "Новое обращение",
+        text: `Имя: ${dto.name},\n Email: ${dto.email},\n Возраст: ${dto.text}`, 
       })
 		}catch(err) {
 			console.log(err);
@@ -26,7 +26,7 @@ export class AppService {
 	async sendAnketa(dto:SendAnketaDto) {
 		try{
 			return await this.mailerService.sendMail({
-        to: "biketoff.m@yandex.ru",
+        to: "diamond-dating@yandex.ru",
 				from: 'mihhha985@yandex.ru', 
         subject: "Новая анкета",
         text: `Имя: ${dto.name},\n Телефон: ${dto.tell},\n Возраст: ${dto.age}`,

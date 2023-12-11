@@ -42,7 +42,7 @@ function Pagination() {
           breakLabel="..."
           nextLabel=">"
           onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={4}
           pageCount={Math.ceil(total / 9)}
           previousLabel="<"
           renderOnZeroPageCount={null}
