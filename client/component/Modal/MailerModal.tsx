@@ -1,10 +1,16 @@
 "use client";
-import {useRef, RefObject} from "react";
+import {useRef, useState, RefObject} from "react";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {hideMailer} from "@/store/features/mailerSlice";
 import { show } from "@/store/features/alertsSlice";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { motion } from "framer-motion";
+
+const variant = {
+	hidden: { opacity: 0, scale: 0.1 },
+	visible: { opacity: 1, scale: 1 }
+}
 
 type Inputs = {
 	name: string,
@@ -15,6 +21,7 @@ type Inputs = {
 function MailerModal() {
   const dispatch = useAppDispatch();
   const { visible } = useAppSelector(state => state.mailer);
+	const [isHidden, setIsHidden]= useState<boolean>(false);
 	const sendButtonRef = useRef() as RefObject<HTMLButtonElement>;
 
 	const {
@@ -60,17 +67,30 @@ function MailerModal() {
 		});
 	}
 
+	const hiddenModal = () => {
+		setIsHidden(true);
+		setTimeout(() => {
+			setIsHidden(false);
+			dispatch(hideMailer())
+		}, 400)
+	}
+
   if(visible){
     return ( 
-      <div 
-        onClick={() => dispatch(hideMailer())}
+      <motion.div 
+				layout
+        onClick={hiddenModal}
         className="modal-container overflow-auto">
         <div
-          onClick={() => dispatch(hideMailer())}
+          onClick={hiddenModal}
           className="cursor-pointer absolute top-0 right-0 text-3xl text-primary p-2 z-50">
           <IoCloseCircleOutline />
         </div>
-        <form
+        <motion.form
+					initial="hidden"
+					animate={isHidden ? "hidden" : "visible"}
+					transition={{duration: 0.4}}
+					variants={variant}
 					onSubmit={handleSubmit(onSubmit)}
           onClick={(e) => e.stopPropagation()} 
           className="modal-content gap-2 sm:gap-3 w-4/5 md:w-1/2 lg:w-1/3 h-5/6 sm:h-auto overflow-y-auto">
@@ -97,8 +117,8 @@ function MailerModal() {
 						{errors.text?.type === 'maxLength' && <span className="form-error">Максимальная длина 500 символов</span>}
           </div>       
           <button ref={sendButtonRef} type="submit" className="mt-5">Отправить</button>
-        </form>
-      </div>
+        </motion.form>
+      </motion.div>
     );
   }
 }

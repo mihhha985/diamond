@@ -2,7 +2,8 @@
 import {useState} from "react";
 import {setLogin} from "@/store/features/profileSlice";
 import {useAppDispatch} from "@/store/hooks";
-import { useForm, SubmitHandler, set } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { motion } from "framer-motion";
 
 type RegisterType = {
 	email: string;
@@ -59,7 +60,10 @@ function RegisterForm() {
 							</div>
 					</div> 
 				: 
-				<form 
+				<motion.form
+					initial={{ opacity: 0, scale: 0.1 }}
+					animate={{ opacity: 1, scale: 1 }}
+					transition={{duration: 0.4}}			
 					onSubmit={handleSubmit(onSubmit)}
 					onClick={(e) => e.stopPropagation()}
 					className="modal-content gap-3 sm:gap-5 w-4/5 md:w-1/2 lg:w-1/3">
@@ -94,7 +98,7 @@ function RegisterForm() {
 								</span>
 							</p>
 					</div>
-				</form>
+				</motion.form>
 			}
 		</>
 	);

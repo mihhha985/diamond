@@ -2,14 +2,20 @@
 import {useState} from "react";
 import {setRegister} from "@/store/features/profileSlice";
 import {useAppDispatch} from "@/store/hooks";
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm, SubmitHandler } from "react-hook-form";
+import { motion } from "framer-motion";
+
+const variant = {
+	hidden: { opacity: 0, scale: 0.1 },
+	visible: { opacity: 1, scale: 1 }
+}
 
 type LoginType = {
 	email: string;
 	password: string;
 };
 
-function LoginForm() {
+function LoginForm({show}: {show:boolean}) {
 	const dispatch = useAppDispatch();
 	const [isLogin, setIsLogin] = useState(false);
 
@@ -30,8 +36,11 @@ function LoginForm() {
 	}
 
 	return (
-		<>
-			<form 
+			<motion.form 
+				initial="hidden"
+				animate={show ? "hidden" : "visible"}
+				transition={{duration: 0.4}}
+				variants={variant}
 				onSubmit={handleSubmit(onSubmit)}
 				onClick={(e) => e.stopPropagation()}
 				className="modal-content gap-5 w-4/5 md:w-1/2 lg:w-1/3">
@@ -64,8 +73,7 @@ function LoginForm() {
 						</span>
 						</p>
 					</div>
-				</form>
-		</>
+				</motion.form>
 	);
 }
 

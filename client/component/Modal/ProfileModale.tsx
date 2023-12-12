@@ -1,4 +1,5 @@
 "use client";
+import {useState} from "react";
 import LoginForm from "./Auth/LoginForm";
 import RegisterForm from "./Auth/RegisterForm";
 import {useAppDispatch, useAppSelector} from "@/store/hooks";
@@ -15,17 +16,26 @@ type RegisterType = {
 function ProfileModal() {
   const dispatch = useAppDispatch();
   const {isLogin, visible} = useAppSelector(state => state.profile);
+	const [isHidden, setIsHidden] = useState<boolean>(false);
+
+	const hiddenModal = () => {
+		setIsHidden(true);
+		setTimeout(() => {
+			setIsHidden(false);
+			dispatch(hideProfile())
+		},0)
+	}
 
   if(visible){
     return ( 
       <div 
-        onClick={() => dispatch(hideProfile())}
+        onClick={hiddenModal}
         className="modal-container">
         <div className="cursor-pointer absolute top-0 right-0 text-3xl text-primary p-2">
-          <IoCloseCircleOutline onClick={() => dispatch(hideProfile())} />
+          <IoCloseCircleOutline onClick={hiddenModal} />
         </div>
         {isLogin 
-          ? <LoginForm />
+          ? <LoginForm show={isHidden} />
           : <RegisterForm />
         }      
       </div>
