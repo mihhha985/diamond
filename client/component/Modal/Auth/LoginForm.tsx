@@ -1,21 +1,16 @@
 "use client"
-import {useState} from "react";
+import {useState, forwardRef, ForwardedRef} from "react";
 import {setRegister} from "@/store/features/profileSlice";
 import {useAppDispatch} from "@/store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { motion } from "framer-motion";
-
-const variant = {
-	hidden: { opacity: 0, scale: 0.1 },
-	visible: { opacity: 1, scale: 1 }
-}
 
 type LoginType = {
 	email: string;
 	password: string;
 };
 
-function LoginForm({show}: {show:boolean}) {
+const LoginForm = motion(forwardRef((props, ref:ForwardedRef<HTMLFormElement>) => {
 	const dispatch = useAppDispatch();
 	const [isLogin, setIsLogin] = useState(false);
 
@@ -36,11 +31,8 @@ function LoginForm({show}: {show:boolean}) {
 	}
 
 	return (
-			<motion.form 
-				initial="hidden"
-				animate={show ? "hidden" : "visible"}
-				transition={{duration: 0.4}}
-				variants={variant}
+			<form 
+				ref={ref}
 				onSubmit={handleSubmit(onSubmit)}
 				onClick={(e) => e.stopPropagation()}
 				className="modal-content gap-5 w-4/5 md:w-1/2 lg:w-1/3">
@@ -73,8 +65,8 @@ function LoginForm({show}: {show:boolean}) {
 						</span>
 						</p>
 					</div>
-				</motion.form>
+				</form>
 	);
-}
+}));
 
 export default LoginForm;

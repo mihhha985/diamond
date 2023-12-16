@@ -9,8 +9,11 @@ type ItemProps = {id: number, name: string, age: number, uuid: string, rating: n
 function CatalogItem({id, name, age, uuid, rating, offset}: ItemProps) {
   return ( 
     <motion.div 
+      initial={{opacity:0}}
+      whileInView={{ opacity: 1 }}
 			whileTap={{ scale: 0.9 }}
-			transition={{ease: "easeInOut", duration: 0.2}}
+			transition={{ease: "easeInOut", duration: 0.3}}
+      viewport={{ once: false }}
 			className="bg-primary rounded-2xl overflow-hidden transition-shadow duration-500 
       border border-secondary-200 shadow-2xl shadow-secondary-200 hover:shadow-none relative mb-10 md:mb-0">
       <Link href={'/view/' + uuid + '/' + offset} className="cursor-pointer relative block w-full h-96">

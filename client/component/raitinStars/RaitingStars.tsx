@@ -18,7 +18,6 @@ function renderStar(rating: number)  {
 }
 
 function RaitinStars({rating}: {rating: number}) {
-	console.log(rating);
 	return ( 
 		<div className='flex gap-1 sm:gap-2'>
       {renderStar(rating)}

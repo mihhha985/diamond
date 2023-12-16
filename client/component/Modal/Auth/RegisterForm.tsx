@@ -1,5 +1,5 @@
 "use client"
-import {useState} from "react";
+import {useState, forwardRef, ForwardedRef} from "react";
 import {setLogin} from "@/store/features/profileSlice";
 import {useAppDispatch} from "@/store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -11,7 +11,7 @@ type RegisterType = {
 	confirm: string;
 };
 
-function RegisterForm() {
+const RegisterForm = motion(forwardRef((props, ref:ForwardedRef<HTMLFormElement>) => {
 	const dispatch = useAppDispatch();
 	const [showConfirm, setShowConfirm] = useState(false);
 	const [error, setError] = useState(false);
@@ -39,7 +39,6 @@ function RegisterForm() {
 		return password === value;
 	}
 
-	console.log(errors);
 	return (
 		<>
 			{showConfirm
@@ -60,10 +59,8 @@ function RegisterForm() {
 							</div>
 					</div> 
 				: 
-				<motion.form
-					initial={{ opacity: 0, scale: 0.1 }}
-					animate={{ opacity: 1, scale: 1 }}
-					transition={{duration: 0.4}}			
+				<form
+					ref={ref}
 					onSubmit={handleSubmit(onSubmit)}
 					onClick={(e) => e.stopPropagation()}
 					className="modal-content gap-3 sm:gap-5 w-4/5 md:w-1/2 lg:w-1/3">
@@ -98,10 +95,10 @@ function RegisterForm() {
 								</span>
 							</p>
 					</div>
-				</motion.form>
+				</form>
 			}
 		</>
 	);
-}
+}));
 
 export default RegisterForm;
