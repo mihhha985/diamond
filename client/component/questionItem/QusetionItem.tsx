@@ -24,7 +24,7 @@ function QuestionItem({title, text}: QuestionItemProps) {
   return ( 
     <motion.div 
 			layout
-			className="flex flex-col">
+			className="flex flex-col justify-start">
       <div className="flex justify-between items-start px-2">
         <h4 className="text-secondary-200 text-lg sm:text-2xl lg:text-3xl font-medium mb-1 sm:mb-2">{title}</h4>
         <motion.div
@@ -42,7 +42,8 @@ function QuestionItem({title, text}: QuestionItemProps) {
 				animate={isHidden ? "hidden" : "visible"}
 				transition={{ease: "easeIn", duration:0.3}}
 				variants={variantText}
-				className={'text pl-5'}>
+				className={'text pl-5'}
+				style={{textAlign:'left'}}>
 				{text}
 			</motion.p>
     </motion.div>

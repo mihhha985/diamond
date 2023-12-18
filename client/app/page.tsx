@@ -7,6 +7,9 @@ import diamond from "@/public/diamond/1.png";
 import DiamondBorder from "@/component/UI/diamondBorder/DiamondBorder";
 import DiamondBox from "@/component/diamonBox/DiamondBox";
 import QuestionItem from "@/component/questionItem/QusetionItem";
+import { FaTelegram } from "react-icons/fa6";
+import { IoLogoWhatsapp } from "react-icons/io";
+import Link from "next/link";
 
 function Main(){   
   return ( 
@@ -123,6 +126,14 @@ function Main(){
         </div>
       </section>
       <footer className="bg-primary text-secondary-200 text-center py-5">
+        <div className="flex justify-end items-center gap-2 px-10">
+          <Link href="https://t.me/diamond_dating">
+            <FaTelegram className="text-3xl"/>
+          </Link>
+          <Link href="https://wa.me/79897634493">
+            <IoLogoWhatsapp className="text-3xl"/>
+          </Link>
+        </div>
         <p className="text-sm sm:text-lg">© 2021 Diamond Datind. All rights reserved.</p>
       </footer>
     </>

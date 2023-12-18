@@ -13,17 +13,15 @@ function Favorites() {
 
   useEffect(() => {
     const ids = localStorage.getItem('favorites');
-    console.log(ids);
     fetch(`${process.env.serverUrl}/models/favorites?ids=${ids}`,  {
       cache: 'no-cache',
     })
     .then(result => result.json())
     .then(result => {
-      console.log(result);
       setUser(result);
     })
 		.catch(error => {
-			console.log('error', error);
+      console.log(error);
 			router.push('/catalog');
 		});
   }, []);

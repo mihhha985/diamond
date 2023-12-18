@@ -103,7 +103,7 @@ function MailerModal() {
 						{errors.name?.type === 'minLength' && <span className="form-error">Минимальная длина 3 символа</span>}
 						{errors.name?.type === 'maxLength' && <span className="form-error">Максимальная длина 20 символов</span>}
           </div>
-          <div className="relative flex flex-col pb-2 pb-3">
+          <div className="relative flex flex-col pb-3">
             <label htmlFor="email">Ваш email:</label>
             <input type="text" id="email" {...register("email", {required:true, pattern: /^([0-9A-Za-z\_\-\.]+)@(([A-Za-z\.]+))$/i})} />
 						{errors.name?.type === 'required' && <span className="form-error">Поле обязательно для заполнения</span>}
@@ -116,7 +116,13 @@ function MailerModal() {
 						{errors.text?.type === 'minLength' && <span className="form-error">Минимальная длина 50 символа</span>}
 						{errors.text?.type === 'maxLength' && <span className="form-error">Максимальная длина 500 символов</span>}
           </div>       
-          <button ref={sendButtonRef} type="submit" className="mt-5">Отправить</button>
+          <motion.button 
+						whileTap={{scale: 0.9}}
+						ref={sendButtonRef} 
+						type="submit" 
+						className="mt-5">
+							Отправить
+					</motion.button>
         </motion.form>
       </motion.div>
     );

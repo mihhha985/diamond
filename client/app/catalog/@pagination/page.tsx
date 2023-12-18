@@ -20,6 +20,9 @@ function Pagination() {
   }, []);
 
 	useEffect(() => {
+    let container = document.getElementById('catalog-container');
+    if(container) container.scrollTo(0, 0);
+    
 		if(offset){
 			try{
 				let num = Math.trunc(parseInt(offset) / 9);

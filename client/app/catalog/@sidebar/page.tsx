@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { MdEmail } from "react-icons/md";
 import { RiStarSmileFill, RiShoppingCart2Fill } from "react-icons/ri";
@@ -13,6 +14,25 @@ import "@/styles/Sidebar.scss";
 function Sidebar() {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  
+  useEffect(() => {
+    setTimeout(() => {
+      let scrollHeight = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+      );
+
+      let height = window.innerHeight;
+      let scroll = scrollHeight - height;
+      window.scrollBy({
+        top: scroll,
+        left: 0,
+        behavior: "smooth"
+      });
+    }, 1500);
+  }, []);
+  
   const showHint = (e:React.MouseEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
     const hint = el.querySelector('p') as HTMLParagraphElement;

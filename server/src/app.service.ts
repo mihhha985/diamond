@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 import {SendMailDto, SendAnketaDto} from './app.dto';
+import "dotenv/config";
 
 @Injectable()
 export class AppService {
@@ -13,7 +14,7 @@ export class AppService {
 	async sendMail(dto:SendMailDto) {
 		try{
 			return await this.mailerService.sendMail({
-        to: "diamond-dating@yandex.ru",
+        to: process.env.ADMIN_EMAIL,
 				from: 'mihhha985@yandex.ru', 
         subject: "Новое обращение",
         text: `Имя: ${dto.name},\n Email: ${dto.email},\n Возраст: ${dto.text}`, 
@@ -26,7 +27,7 @@ export class AppService {
 	async sendAnketa(dto:SendAnketaDto) {
 		try{
 			return await this.mailerService.sendMail({
-        to: "diamond-dating@yandex.ru",
+        to: process.env.ADMIN_EMAIL,
 				from: 'mihhha985@yandex.ru', 
         subject: "Новая анкета",
         text: `Имя: ${dto.name},\n Телефон: ${dto.tell},\n Возраст: ${dto.age}`,
