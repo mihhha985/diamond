@@ -13,6 +13,7 @@ function Favorites() {
 
   useEffect(() => {
     const ids = localStorage.getItem('favorites');
+    if(!ids) router.push('/catalog');
     fetch(`${process.env.serverUrl}/models/favorites?ids=${ids}`,  {
       cache: 'no-cache',
     })
@@ -28,7 +29,7 @@ function Favorites() {
   
   if(user.length > 0){
     return ( 
-      <div className="relative">
+      <>
         <div className="catalog-container">
           <h3 className="text-2xl sm:text-4xl font-semibold mb-2 sm:mb-5 mt-2 sm:mt-0">Каталог Моделей</h3>
           <div className="blok md:grid md:grid-cols-2 xl:grid-cols-3 w-full gap-2 md:gap-5 lg:gap-20 xl:gap-10">
@@ -48,7 +49,7 @@ function Favorites() {
         <AlertModal />
         <ProfileModal />
         <MailerModal />
-      </div>
+      </>
     );
   }
 }

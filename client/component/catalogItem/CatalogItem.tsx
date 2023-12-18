@@ -21,6 +21,7 @@ function CatalogItem({id, name, age, uuid, rating, offset}: ItemProps) {
           src={`${process.env.serverUrl}/${id}/ava.jpg`}
           alt={name}
           fill={true}
+          priority={true}
           sizes="100%"
           className="object-cover"
         />

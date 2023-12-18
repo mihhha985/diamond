@@ -1,4 +1,3 @@
-"use client"
 import CatalogItem from "@/component/catalogItem/CatalogItem";
 import AlertModal from "@/component/Modal/AlertModal";
 import ProfileModal from "@/component/Modal/ProfileModale";
