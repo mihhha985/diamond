@@ -5,6 +5,7 @@ import {show} from "@/store/features/alertsSlice";
 import DiamondBorder from "@/component/UI/diamondBorder/DiamondBorder";
 import { TypeFigures, TypeHair } from "@/config/params";
 import AlertModal from "@/component/Modal/AlertModal";
+import DefaultButton from "@/component/UI/defaultButton/defaultButton";
 
 function Anketa() {
 	const dispatch = useDispatch();
@@ -288,10 +289,12 @@ function Anketa() {
 			</div>
 
 			<div className="w-full">
-				<button 
+				<DefaultButton 
 					ref={submitRef}
 					type="submit" 
-					className="bg-secondary-200 text-primary text-lg font-semibold p-2 rounded-md w-1/2">Отправить</button>
+					className="bg-secondary-200 text-primary text-lg font-semibold p-2 rounded-md w-1/2" 
+					text="Отправить" 
+				/>
 			</div>
   	</div>
   	</form>

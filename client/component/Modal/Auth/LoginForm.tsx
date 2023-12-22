@@ -4,6 +4,7 @@ import {setRegister} from "@/store/features/profileSlice";
 import {useAppDispatch} from "@/store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { motion } from "framer-motion";
+import DefaultButton from "@/component/UI/defaultButton/defaultButton";
 
 type LoginType = {
 	email: string;
@@ -47,7 +48,6 @@ const LoginForm = motion(forwardRef((props, ref:ForwardedRef<HTMLFormElement>) =
 					<div className="relative flex flex-col pb-4">
 						<label>Email:</label>
 						<input {...register("email", {required:true, pattern: /^([0-9A-Za-z\_\-\.]+)@(([A-Za-z\.]+))$/i})} />
-						{errors.email && <span className="form-error">Поле обязательно для заполнения</span>}
 						{errors.email && <span className="form-error">Не корректный Email адрес</span>}
 					</div>
 					<div className="relative flex flex-col pb-4">
@@ -56,7 +56,7 @@ const LoginForm = motion(forwardRef((props, ref:ForwardedRef<HTMLFormElement>) =
 						{errors.password && <span className="form-error">Поле обязательно для заполнения</span>}
 					</div>
 					<div>
-						<button type="submit">Вход</button>
+						<DefaultButton text="Войти" type="submit" className="mt-5"/>
 						<p className="mt-1">Нет аккаунта?
 						<span
 							onClick={() => dispatch(setRegister())} 

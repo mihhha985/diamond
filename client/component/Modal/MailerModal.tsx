@@ -6,6 +6,7 @@ import {hideMailer} from "@/store/features/mailerSlice";
 import { show } from "@/store/features/alertsSlice";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
+import DefaultButton from "../UI/defaultButton/defaultButton";
 
 const variant = {
 	hidden: { opacity: 0, scale: 0.1 },
@@ -116,13 +117,12 @@ function MailerModal() {
 						{errors.text?.type === 'minLength' && <span className="form-error">Минимальная длина 50 символа</span>}
 						{errors.text?.type === 'maxLength' && <span className="form-error">Максимальная длина 500 символов</span>}
           </div>       
-          <motion.button 
-						whileTap={{scale: 0.9}}
+          <DefaultButton 
+						text="Отправить"
 						ref={sendButtonRef} 
 						type="submit" 
-						className="mt-5">
-							Отправить
-					</motion.button>
+						className="mt-5"
+					 />		
         </motion.form>
       </motion.div>
     );

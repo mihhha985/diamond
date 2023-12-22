@@ -10,6 +10,7 @@ import { showPayment } from "@/store/features/paymentSlice";
 import AlertModal from "../Modal/AlertModal";
 import PaymentModal from "../Modal/PaymentModal";
 import translate from "@/config/translate-view";
+import DefaultButton from "../UI/defaultButton/defaultButton";
 import styles from './viewDescript.module.css';
 
 function ViewDescript({user}: {user: Contact}) {
@@ -145,24 +146,30 @@ function ViewDescript({user}: {user: Contact}) {
           </div>
         </div>
         <div className="flex flex-col xl:flex-row gap-2 w-full mt-auto whitespace-nowrap">
-          <button
+          <DefaultButton
             onClick={() => {dispatch(showPayment())}} 
-            className={styles.btn}>
-            Получить контакты</button>
-          <button
+            className={styles.btn}
+            text="Получить контакты"
+            type="button" 
+          />
+          <DefaultButton
             onClick={() => {dispatch(show({
               text: translate.transfer.ru,
               language: 'ru'
             }))}} 
-            className={styles.btn}>Оплатить трансфер
-            </button>
-          <button
+            className={styles.btn}
+            text="Оплатить трансфер"
+            type="button"
+           />
+          <DefaultButton
             onClick={() => {dispatch(show({
               text: translate.order.ru,
               language: 'ru'
             }))}}
-            className={styles.btn}>Заказать цветы
-            </button>
+            className={styles.btn}
+            text="Заказать цветы"
+            type="button" 
+          />
         </div>
       </div>
       <AlertModal />

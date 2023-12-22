@@ -4,6 +4,7 @@ import {setLogin} from "@/store/features/profileSlice";
 import {useAppDispatch} from "@/store/hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { motion } from "framer-motion";
+import DefaultButton from "@/component/UI/defaultButton/defaultButton";
 
 type RegisterType = {
 	email: string;
@@ -55,7 +56,7 @@ const RegisterForm = motion(forwardRef((props, ref:ForwardedRef<HTMLFormElement>
 							</h4>
 							<div className="flex gap-5">
 								<input type="text" />
-								<button onClick={() => setError(true)}>Подтвердить</button>
+								<DefaultButton text="Подтвердить" onClick={() => setError(true)} />
 							</div>
 					</div> 
 				: 
@@ -70,7 +71,7 @@ const RegisterForm = motion(forwardRef((props, ref:ForwardedRef<HTMLFormElement>
 						<label htmlFor="email">Email:</label>
 						<input type="text" id="email" {...register("email", {required:true, pattern: /^([0-9A-Za-z\_\-\.]+)@(([A-Za-z\.]+))$/i})} />
 						{errors.password?.type === 'required' && <span className="form-error">Поле обязательно для заполнения</span>}
-						{errors.email && <span className="form-error">Не корректный Email адрес</span>}
+						{errors.email?.type === 'email' && <span className="form-error">Не корректный Email адрес</span>}
 					</div>
 					<div className="relative flex flex-col pb-3">
 						<label htmlFor="password">Пароль:</label>
@@ -86,14 +87,14 @@ const RegisterForm = motion(forwardRef((props, ref:ForwardedRef<HTMLFormElement>
 						{errors.confirm?.type === 'validate' && <span className="form-error">Пароли не совпадают</span>}
 					</div>
 					<div>
-						<button type="submit" className="mt-5">Регистрация</button>
-							<p className="mt-1">Есть аккаунт?
-								<span 
+						<DefaultButton text="Регистрация" type="submit" className="mt-5" />
+						<p className="mt-1">Есть аккаунт?
+							<span 
 								onClick={() => dispatch(setLogin())}
 								className="cursor-pointer ml-1 underline">
 								Войдите!
-								</span>
-							</p>
+							</span>
+						</p>
 					</div>
 				</form>
 			}
