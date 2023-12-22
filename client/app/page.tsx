@@ -16,7 +16,7 @@ function Main(){
     <>
       <section className="relative bg-gradient">
           <div className="ml-5 lg:ml-10 lg:w-1/2">
-            <h1 className="font-semibold text-2xl sm:text-4xl lg:text-6xl">Diamond Dating</h1>
+            <h1 className="font-semibold text-2xl sm:text-4xl lg:text-6xl">Luxury Meeting</h1>
             <DiamondBorder width="60px" bg="white"/>
             <h3 className="font-light text-lg sm:text-2xl lg:text-3xl leading-5 sm:leading-6 lg:leading-8 mt-2">
               Знакомства с девушками модельной<br />внешности для сопровождения<br /> содержания и пикантных встреч...
@@ -126,7 +126,7 @@ function Main(){
         </div>
       </section>
       <footer className="bg-primary text-secondary-200 text-center py-5">
-        <div className="flex justify-end items-center gap-2 px-10">
+        <div className="flex justify-end items-center gap-2 px-10 hidden">
           <Link href="https://t.me/diamond_dating">
             <FaTelegram className="text-3xl"/>
           </Link>
@@ -134,7 +134,7 @@ function Main(){
             <IoLogoWhatsapp className="text-3xl"/>
           </Link>
         </div>
-        <p className="text-sm sm:text-lg">© 2021 Diamond Datind. All rights reserved.</p>
+        <p className="text-sm sm:text-lg">© 2021 Luxury Meeting. All rights reserved.</p>
       </footer>
     </>
   );
