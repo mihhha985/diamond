@@ -13,7 +13,7 @@ const inter = Cormorant_SC({
 });
 
 export const metadata : Metadata = {
-  title: 'Luxury Meeting | Эскортницы, модели, содержанки',
+  title: 'Dianond Club | Эскортницы, модели, содержанки',
   description: 'Знакомства с девушками модельной внешности для сопровождения содержания и пикантных встреч...',
 }
 
