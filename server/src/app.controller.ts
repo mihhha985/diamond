@@ -6,10 +6,10 @@ import {SendMailDto, SendAnketaDto} from './app.dto';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return 'hello world';
-  }
+	@Get()
+	getHello(): string {
+		return "Hello World!";
+	}
 
 	@Post('/mailer')
 	@HttpCode(200)

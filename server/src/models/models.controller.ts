@@ -13,7 +13,7 @@ import { Contact } from './entity/contact.entity';
 export class ModelsController {
   constructor(private readonly modelsService: ModelsService) {}
 
-  @Get()
+  @Get('/')
   findAll(@Query('offset') offset:string):Promise<Contact[]> {
     let offsetNumber:number = 0;
 

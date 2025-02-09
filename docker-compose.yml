@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: nintendo27
+      MYSQL_DATABASE: koketka
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./dump/Dump20231209.sql:/docker-entrypoint-initdb.d/Dump20231209.sql
+  server:
+    build: ./server
+    ports:
+      - "8000:8000"
+    environment: 
+      DB_NAME: koketka
+      DB_USERNAME: root
+      DB_PASSWORD: nintendo27
+      DB_HOST: db
+      DB_PORT: "3306"
+    depends_on:
+      - db
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    depends_on: 
+      - server

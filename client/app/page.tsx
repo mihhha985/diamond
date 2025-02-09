@@ -11,7 +11,7 @@ import { FaTelegram } from "react-icons/fa6";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Link from "next/link";
 
-function Main(){   
+function Main(){  
   return ( 
     <>
       <section className="relative bg-gradient">
